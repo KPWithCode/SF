@@ -30,7 +30,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchUser();
-  }, [currentSession]);
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 md:bg-deepBlue">
@@ -46,7 +46,7 @@ const Home = () => {
                 </a>
               </div>
             ) : (
-              <div >
+              <div>
                 Sign up/Log in&nbsp;
                 <a className="text-blue-500">Below</a>
               </div>
@@ -74,10 +74,21 @@ const Home = () => {
           </a>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row md:justify-evenly md:items-center md:w-full md:pr-20 md:ml-52 ">
-        <div className="col-6 auth-widget md:mr-28 md:w-2/5 lg:w-auto">
-          <AuthForm />
-        </div>
+      <div className="flex flex-col md:flex-row md:justify-evenly md:items-center md:w-full md:pr-20 md:ml-52">
+        {currentSession && currentSession.user.aud ? (
+          <a
+            href="/dashboard"
+            className="border border-gray-300 p-8 rounded-lg text-lightBlue hover:bg-firmBlue"
+          >
+            <div className="col-6 auth-widget md:mx-28 md:w-2/5 lg:w-auto text-normal md:text-lg ">
+              Navigate to Dashboard
+            </div>
+          </a>
+        ) : (
+          <div className="col-6 auth-widget md:mr-28 md:w-2/5 lg:w-auto">
+            <AuthForm />
+          </div>
+        )}
         <div className="text-center sm:text-start sm:ml-0 md:ml-48 lg:ml-auto sm:mb-44 sm:mt-0 mt-12 font-bold text-xl  lg:text-5xl font-sans tracking-wide sm:text-white lg:mr-28">
           Redefine Processes in <br />
           <p>
