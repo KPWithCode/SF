@@ -1,4 +1,5 @@
 import { supabaseClient } from "./supabase";
+import { createUserInDatabase, userExistsInDatabase } from "./user";
 
 export async function signInWithEmail(email: string) {
     try {
@@ -26,10 +27,19 @@ export async function signInWithEmail(email: string) {
       // Check if session is not null
       if (data && data.session) {
         const { access_token, refresh_token } = data.session;
+        
+        const userId = data.session.user.id;
+        const email = data.session.user?.email;
+        const display_name = data.session.user.user_metadata?.name;
+
+        const userExists = await userExistsInDatabase(userId);
+        if (!userExists) {
+          // Create a user record in the database
+          await createUserInDatabase(userId, email, display_name);
+        }
   
         // If session exists, set it
         await setSession(access_token, refresh_token);
-  
         // Return the session
         return data.session;
       } else {
