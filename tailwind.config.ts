@@ -9,7 +9,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Add your custom colors here
         lightBlue: '#75a2ff',
         mediumBlue:'#002bab',
         darkBlue: '#00268d',
