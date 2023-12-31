@@ -16,10 +16,8 @@ const Home = () => {
     try {
       const session = await getSession();
       if (session && session.user) {
-        console.log(session.user);
         setSession(session);
       } else {
-        console.log("user is not authenticated");
         setSession(null);
       }
     } catch (err) {
