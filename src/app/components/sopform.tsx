@@ -4,9 +4,6 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 const SopForm = () => {
   const [steps, setSteps] = useState([{ step: "Step 1", substeps: ["1a"] }]);
   const [resources, setResources] = useState(["Resource #1"]);
-  const [revisionHistory, setRevisionHistory] = useState([
-    { date: "2023-01-01", description: "Initial Draft" },
-  ]);
   const [substepClicked, setSubstepClicked] = useState<boolean[]>([]);
 
   const addStep = () => {
@@ -60,15 +57,6 @@ const SopForm = () => {
     }
   };
 
-  const addRevision = () => {
-    setRevisionHistory([
-      ...revisionHistory,
-      {
-        date: new Date().toISOString().split("T")[0],
-        description: "Description of the change",
-      },
-    ]);
-  };
 
   return (
     <div className="p-4 sm:p-8 md:p-12">
